@@ -29,31 +29,47 @@
 
   <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="home.html">Home</a>
-    <a href="genres.html">Genres</a>
+    <a href="home.php">Home</a>
+    <a href="genres.php">Genres</a>
   </div>
 
   <div id="main">
-    <h1 class="title">Acoustic</h1>
-    <table id="customers">
-      <tr>
-        <th>Title</th>
-        <th>Artist</th>
-      </tr>
-      <tr>
-        <td>Song 1</td>
-        <td>Artist Name 1</td>
-        
-      </tr>
-      <tr>
-        <td>Song 2</td>
-        <td>Artist Name 2</td>
-      </tr>
-      <tr>
-        <td>Song 3</td>
-        <td>Artist Name 3</td>
-      </tr>
-    </table>
+
+    <section class="genres_main_section">
+      <div class="call_to_action">
+        <h1 class="title">Genres</h1>
+
+        <div class="icon_section"></div>
+
+      </div>
+      <div></div>
+
+    </section>
+    
+    <!-- Home cards 1 -->
+    <section class="home-cards">
+      <a href="genre.php">
+        <div>      
+          <i class="fas fa-guitar"></i>
+          <h3>Acoustic</h3>
+          <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
+        </div>
+      </a>
+      <a href="#">
+        <div>
+          <i class="fas fa-headphones"></i>
+          <h3>HipHop</h3>
+          <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
+        </div>
+      </a>
+      <a href="#">
+      <div>
+        <i class="fa fa-compact-disc"></i>
+        <h3>House</h3>
+        <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
+      </div>
+    </a>
+    </section>
   </div>
 
   <script>

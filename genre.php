@@ -14,9 +14,9 @@
     <span class="open-slide">
       <a href="#" onclick="openSlideMenu()">
         <svg width="30" height="30">
-            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+          <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+          <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+          <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
         </svg>
       </a>
     </span>
@@ -29,32 +29,29 @@
 
   <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="home.html">Home</a>
-    <a href="genres.html">Genres</a>
+    <a href="home.php">Home</a>
+    <a href="genres.php">Genres</a>
   </div>
 
   <div id="main">
-    <h1 class="title">All Music</h1>
+    <h1 class="title">Acoustic</h1>
     <table id="customers">
       <tr>
         <th>Title</th>
         <th>Artist</th>
-        <th>Genre</th>
       </tr>
       <tr>
         <td>Song 1</td>
         <td>Artist Name 1</td>
-        <td>pop</td>
+        
       </tr>
       <tr>
         <td>Song 2</td>
         <td>Artist Name 2</td>
-        <td>Jazz</td>
       </tr>
       <tr>
         <td>Song 3</td>
         <td>Artist Name 3</td>
-        <td>Acoustic</td>
       </tr>
     </table>
   </div>

@@ -14,9 +14,9 @@
     <span class="open-slide">
       <a href="#" onclick="openSlideMenu()">
         <svg width="30" height="30">
-          <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
-          <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
-          <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
+            <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+            <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+            <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
         </svg>
       </a>
     </span>
@@ -29,8 +29,8 @@
 
   <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="home.html">Home</a>
-    <a href="genres.html">Genre</a>
+    <a href="home.php">Home</a>
+    <a href="genres.php">Genres</a>
   </div>
 
   <div id="main">
@@ -57,7 +57,7 @@
         <td>Acoustic</td>
       </tr>
     </table>
-  </div><!-- main tag -->
+  </div>
 
   <script>
     function openSlideMenu(){
