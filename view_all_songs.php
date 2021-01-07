@@ -34,30 +34,28 @@
   </div>
 
   <div id="main">
-    <h1 class="title">All Music</h1>
+    <h1 class="title">All Songs</h1>
     
-    
+<?php include "db.php"; ?>
+<?php $connection = $pdo->open(); ?>
+<?php $allSongs = $connection->prepare("SELECT * FROM songs"); ?>
+<?php $allSongs->execute(); ?>
+
     <table id="customers">
       <tr>
         <th>Title</th>
         <th>Artist</th>
         <th>Genre</th>
       </tr>
-      <tr>
-        <td>Song 1</td>
-        <td>Artist Name 1</td>
-        <td>pop</td>
-      </tr>
-      <tr>
-        <td>Song 2</td>
-        <td>Artist Name 2</td>
-        <td>Jazz</td>
-      </tr>
-      <tr>
-        <td>Song 3</td>
-        <td>Artist Name 3</td>
-        <td>Acoustic</td>
-      </tr>
+      
+        <?php foreach($allSongs as $row){ ?>
+        <!--  html -->
+        <tr>
+          <td><?= $row['songTitle'] ?></td>
+          <td><?= $row['songArtistName'] ?></td>
+          <td><?= $row['songGenre'] ?></td>
+        </tr>
+        <?php  }?>
     </table>
   </div>
 

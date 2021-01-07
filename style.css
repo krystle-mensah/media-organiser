@@ -86,6 +86,7 @@ body{
   padding: 8px;
   background-color: #333333;
   color: white;
+  text-align: left;
 }
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
