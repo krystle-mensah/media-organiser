@@ -35,6 +35,30 @@
 
   <div id="main">
     <h1 class="title">All Music</h1>
+    <?php
+    // first open a connection to the database
+    $connection = $pdo->open();
+    // then a try catch for errors
+    try {
+      // then query table from the database
+      $allSongs = $connection->prepare("SELECT * FROM songs");
+      // then excute query
+      $allSongs->execute();
+      // then I want a foreach loop
+      foreach($allSongs as $row){
+        // then say what row
+        $songTitle = $row['songTitle'];
+        //
+        
+
+      }
+
+    }
+    catch(PDOException $e){
+      echo "There is some problem in connection: " . $e->getMessage();
+    }
+
+    ?>
     <table id="customers">
       <tr>
         <th>Title</th>
