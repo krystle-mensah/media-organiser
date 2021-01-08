@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <span class="open-slide">
+    <!-- <span class="open-slide">
       <a href="#" onclick="openSlideMenu()">
         <svg width="30" height="30">
           <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
@@ -19,19 +19,21 @@
           <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
         </svg>
       </a>
-    </span>
+    </span> -->
 
     <ul class="navbar-nav">
       <li><a href="#">Username</a></li>
       <li><a href="#"><i class="fas fa-user"></i></a></li>
+      <li><a href="home.php">Home</a></li>
+      <li><a href="genres.php">Genres</a></li>
     </ul>
   </nav>
 
-  <div id="side-menu" class="side-nav">
+  <!-- <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
     <a href="home.php">Home</a>
     <a href="genres.php">Genres</a>
-  </div>
+  </div> -->
 
   <div id="main">
 
@@ -55,17 +57,63 @@
     <!-- Home cards 1 -->
     <section class="home-cards">
       <?php foreach($allGenres as $row){ ?>
-      <a href="genre.php">
-        <div>      
-          <i class="fas fa-guitar"></i>
+      <a class="icon_link" href="genres.php?$source=acoustic">
+        <div>
+          <?= $row['genre_icon'] ?>
           <h3><?= $row['genreTitle'] ?></h3>
         </div>
       </a>
       <?php }?>
       <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
-    
     </section>
   </div>
+
+  <?php 
+
+            //check if the 'source' has been declared
+            if(isset($_GET['source'])){
+
+              // if ture assign variable
+              $source = $_GET['source'];
+
+            // we have to put an else because im getting an undefined variable.  
+            } else {
+
+              // variable assigned to eptmy string
+              $source = '';
+
+            }
+
+            // compare variable with each case.
+            switch($source){
+              // if source is equal to add post
+              case 'acoustic';
+
+              //then display this
+              include "genre_pages/genre_acoustic.php";
+            
+              // stop
+              break;
+
+              // if source is equal to this page
+              case 'hipHop';
+
+              //then display this
+              include "genre_pages/genre_hipHop.php";
+            
+              // stop
+              break;
+              
+              case 'house';
+
+              //then display this
+              include "genre_pages/genre_house.php";
+            
+              // stop
+              break;
+            }
+
+            ?>
 
   <script>
     function openSlideMenu(){

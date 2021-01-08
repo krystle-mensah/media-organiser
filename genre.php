@@ -24,14 +24,16 @@
     <ul class="navbar-nav">
       <li><a href="#">Username</a></li>
       <li><a href="#"><i class="fas fa-user"></i></a></li>
+      <li><a href="home.php">Home</a></li>
+      <li><a href="genres.php">Genres</a></li>
     </ul>
   </nav>
 
-  <div id="side-menu" class="side-nav">
+  <!-- <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
     <a href="home.php">Home</a>
     <a href="genres.php">Genres</a>
-  </div>
+  </div> -->
 
   <div id="main">
     <h1 class="title">Acoustic</h1>

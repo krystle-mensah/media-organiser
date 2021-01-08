@@ -11,7 +11,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <span class="open-slide">
+    <!-- <span class="open-slide">
       <a href="#" onclick="openSlideMenu()">
         <svg width="30" height="30">
             <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
@@ -19,19 +19,21 @@
             <path d="M0,23 30,23" stroke="#fff" stroke-width="5"/>
         </svg>
       </a>
-    </span>
+    </span> -->
 
     <ul class="navbar-nav">
       <li><a href="#">Username</a></li>
       <li><a href="#"><i class="fas fa-user"></i></a></li>
+      <li><a href="home.php">Home</a></li>
+      <li><a href="genres.php">Genres</a></li>
     </ul>
   </nav>
 
-  <div id="side-menu" class="side-nav">
+  <!-- <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
     <a href="home.php">Home</a>
     <a href="genres.php">Genres</a>
-  </div>
+  </div> -->
 
   <div id="main">
     <h1 class="title">All Songs</h1>
@@ -40,8 +42,7 @@
 include "db.php"; 
 $connection = $pdo->open(); 
 $allSongs = $connection->prepare("SELECT * FROM songs"); 
-$allSongs->execute(); 
-
+$allSongs->execute();
 ?>
 
     <table id="customers">
@@ -51,14 +52,23 @@ $allSongs->execute();
         <th>Genre</th>
       </tr>
       
-        <?php foreach($allSongs as $row){ ?>
-        <!--  html -->
-        <tr>
-          <td><?= $row['songTitle'] ?></td>
-          <td><?= $row['songArtistName'] ?></td>
-          <td><?= $row['songGenre'] ?></td>
-        </tr>
-        <?php  }?>
+      <?php foreach($allSongs as $row){ 
+      $songGenre   = $row['songGenre'];
+      ?>
+      <!--  html -->
+      <tr>
+        <td><?= $row['songTitle'] ?></td>
+        <td><?= $row['songArtistName'] ?></td>
+        <?php $GenresID = $connection->prepare("SELECT * FROM genres WHERE genreID = {$songGenre}"); 
+        $GenresID->execute();
+        ?>
+        <?php foreach($GenresID as $row){ ?>
+          <?php if($songGenre == $row['genreID']): ?>
+          <td><?= $row['genreTitle'] ?></td>
+          <?php endif;?>
+        <?php } ?>
+      </tr>
+      <?php } ?>
     </table>
   </div>
 
