@@ -138,24 +138,14 @@ h1.title {
   /* font-weight: bold; */
 }
 
-.home-cards a:hover i {
+.home-cards a.icon_link:hover i {
   margin-left: 10px;
 }
 
-i.fas.fa-guitar {
+a.icon_link i {
   color: white;
   font-size: 6rem;
-}
-
-i.fa.fa-compact-disc {
-  font-size: 6rem;
-  color: white;
-}
-
-i.fas.fa-headphones {
-  font-size: 6rem;
-  color: white;
-}
+} 
 
 @media(max-width:767px){
   /* .navbar-nav{display:none} */
