@@ -45,30 +45,25 @@
       <div></div>
 
     </section>
+    <?php 
+      include "db.php"; 
+      $connection = $pdo->open(); 
+      $allGenres = $connection->prepare("SELECT * FROM genres"); 
+      $allGenres->execute(); 
+    ?>
     
     <!-- Home cards 1 -->
     <section class="home-cards">
+      <?php foreach($allGenres as $row){ ?>
       <a href="genre.php">
         <div>      
           <i class="fas fa-guitar"></i>
-          <h3>Acoustic</h3>
-          <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
+          <h3><?= $row['genreTitle'] ?></h3>
         </div>
       </a>
-      <a href="#">
-        <div>
-          <i class="fas fa-headphones"></i>
-          <h3>HipHop</h3>
-          <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
-        </div>
-      </a>
-      <a href="#">
-      <div>
-        <i class="fa fa-compact-disc"></i>
-        <h3>House</h3>
-        <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
-      </div>
-    </a>
+      <?php }?>
+      <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
+    
     </section>
   </div>
 

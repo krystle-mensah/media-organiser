@@ -36,10 +36,12 @@
   <div id="main">
     <h1 class="title">All Songs</h1>
     
-<?php include "db.php"; ?>
-<?php $connection = $pdo->open(); ?>
-<?php $allSongs = $connection->prepare("SELECT * FROM songs"); ?>
-<?php $allSongs->execute(); ?>
+<?php 
+include "db.php"; 
+$connection = $pdo->open(); 
+$allSongs = $connection->prepare("SELECT * FROM songs"); 
+$allSongs->execute(); 
+?>
 
     <table id="customers">
       <tr>
