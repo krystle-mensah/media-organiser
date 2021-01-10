@@ -53,11 +53,54 @@
       $allGenres = $connection->prepare("SELECT * FROM genres"); 
       $allGenres->execute(); 
     ?>
+     <?php 
+
+if (isset($_GET['genre'])) {
+  // compare variable with each case.
+  switch($_GET['genre']){
+    // if source is equal to add post
+    case 'acoustic';
+
+    //then display this
+    include "genre_pages/genre_acoustic.php";
+
+    // stop
+    break;
+
+    // if source is equal to this page
+    case 'hipHop';
+
+    //then display this
+    include "genre_pages/genre_hipHop.php";
+
+    // stop
+    break;
+    
+    case 'house';
+
+    //then display this
+    include "genre_pages/genre_house.php";
+
+    // stop
+    break;
+  }
+}
+
+?>
     
     <!-- Home cards 1 -->
     <section class="home-cards">
-      <?php foreach($allGenres as $row){ ?>
-      <a class="icon_link" href="genres.php?$source=acoustic">
+    <?php    
+      $allSongs = $connection->prepare("SELECT * FROM songs"); 
+      $allSongs->execute();  
+    ?>
+
+      <?php foreach($allGenres as $row){ 
+        $sortingGenre = $row['sorting'];
+      ?>
+
+      <a class="icon_link" href="#">
+      
         <div>
           <?= $row['genre_icon'] ?>
           <h3><?= $row['genreTitle'] ?></h3>
@@ -67,53 +110,6 @@
       <!-- <a href="#">Learn More <i class="fas fa-chevron-right"></i></a> -->
     </section>
   </div>
-
-  <?php 
-
-            //check if the 'source' has been declared
-            if(isset($_GET['source'])){
-
-              // if ture assign variable
-              $source = $_GET['source'];
-
-            // we have to put an else because im getting an undefined variable.  
-            } else {
-
-              // variable assigned to eptmy string
-              $source = '';
-
-            }
-
-            // compare variable with each case.
-            switch($source){
-              // if source is equal to add post
-              case 'acoustic';
-
-              //then display this
-              include "genre_pages/genre_acoustic.php";
-            
-              // stop
-              break;
-
-              // if source is equal to this page
-              case 'hipHop';
-
-              //then display this
-              include "genre_pages/genre_hipHop.php";
-            
-              // stop
-              break;
-              
-              case 'house';
-
-              //then display this
-              include "genre_pages/genre_house.php";
-            
-              // stop
-              break;
-            }
-
-            ?>
 
   <script>
     function openSlideMenu(){

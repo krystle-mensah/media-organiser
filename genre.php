@@ -9,6 +9,9 @@
   <script src="https://kit.fontawesome.com/4c907bd459.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
 </head>
+
+<?php include "db.php"; ?>
+
 <body>
   <nav class="navbar">
     <span class="open-slide">
@@ -34,6 +37,12 @@
     <a href="home.php">Home</a>
     <a href="genres.php">Genres</a>
   </div> -->
+  <?php if(isset($_GET['specific_song_id'])){?>
+    <!-- // TEST -->
+      <!-- //echo $the_chapter = $_GET['specific_chapter_id']; -->
+      <!-- //$the_chapter = $_GET['specific_chapter_id']; -->
+
+  <?php }?>
 
   <div id="main">
     <h1 class="title">Acoustic</h1>

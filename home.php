@@ -54,6 +54,7 @@ $allSongs->execute();
       
       <?php foreach($allSongs as $row){ 
       $songGenre   = $row['songGenre'];
+      $songID   = $row['songID'];
       ?>
       <!--  html -->
       <tr>
@@ -65,12 +66,33 @@ $allSongs->execute();
         <?php foreach($GenresID as $row){ ?>
           <?php if($songGenre == $row['genreID']): ?>
           <td><?= $row['genreTitle'] ?></td>
+          <!-- im sending info to the same page -->
+          <td><a class="all_songs_delete" href="home.php?delete=<?php echo $songID ?>"> delete </td></a>
+          <td>
+          <a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> edit </a>
+          </td>
           <?php endif;?>
         <?php } ?>
       </tr>
       <?php } ?>
     </table>
   </div>
+
+  <?php
+  
+  // this works when the page is refreashed
+
+  if(isset($_GET['delete'])){
+    echo $theSongID = $_GET['delete'];
+
+    $delete_song_query = $connection->prepare("DELETE FROM songs WHERE songID = {$theSongID}");
+    $delete_song_query->execute(); 
+  
+
+    //header("Location: home.php");
+  
+  }
+  ?>
 
   <script>
     function openSlideMenu(){
