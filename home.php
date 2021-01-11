@@ -52,7 +52,8 @@ $allSongs->execute();
         <th>Genre</th>
       </tr>
       
-      <?php foreach($allSongs as $row){ 
+      <?php foreach($allSongs as $row){ ?>
+      <?php 
       $songGenre   = $row['songGenre'];
       $songID   = $row['songID'];
       ?>
@@ -60,18 +61,22 @@ $allSongs->execute();
       <tr>
         <td><?= $row['songTitle'] ?></td>
         <td><?= $row['songArtistName'] ?></td>
-        <?php $GenresID = $connection->prepare("SELECT * FROM genres WHERE genreID = {$songGenre}"); 
+        <?php 
+        $GenresID = $connection->prepare("SELECT * FROM genres"); 
         $GenresID->execute();
         ?>
         <?php foreach($GenresID as $row){ ?>
-          <?php if($songGenre == $row['genreID']): ?>
+          <?php if($songGenre == $row['genreID']){ ?>
           <td><?= $row['genreTitle'] ?></td>
-          <!-- im sending info to the same page -->
+
+          
+          <!-- EDITED BUTTONS -->
+
           <td><a class="all_songs_delete" href="home.php?delete=<?php echo $songID ?>"> delete </td></a>
           <td>
           <a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> edit </a>
           </td>
-          <?php endif;?>
+          <?php } ?>
         <?php } ?>
       </tr>
       <?php } ?>

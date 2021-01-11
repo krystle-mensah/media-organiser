@@ -53,7 +53,7 @@
       $allGenres = $connection->prepare("SELECT * FROM genres"); 
       $allGenres->execute(); 
     ?>
-     <?php 
+    <?php 
 
 if (isset($_GET['genre'])) {
   // compare variable with each case.
@@ -95,15 +95,15 @@ if (isset($_GET['genre'])) {
       $allSongs->execute();  
     ?>
 
-      <?php foreach($allGenres as $row){ 
-        $sortingGenre = $row['sorting'];
+      <?php foreach($allSongs as $row){ 
+        //$sortingGenre = $row['sorting'];
       ?>
 
       <a class="icon_link" href="#">
       
         <div>
-          <?= $row['genre_icon'] ?>
-          <h3><?= $row['genreTitle'] ?></h3>
+          <?= $row['songGenre_icon'] ?>
+          <h3><?= $row['songGenreName'] ?></h3>
         </div>
       </a>
       <?php }?>
