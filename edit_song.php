@@ -34,11 +34,10 @@
 
 <?php $connection = $pdo->open();?>
 
+<!-- GET REQUEST FOR SONG ID -->
+
 <?php 
-
 if(isset($_GET['s_id'])){
-
-
   $the_song_id = $_GET['s_id'];
 
   //then select all from table where colum value matches the GET id.
@@ -46,19 +45,39 @@ if(isset($_GET['s_id'])){
   $get_song_id->execute(); 
 
 }
+
 ?>
 
-<?php
-$connection = $pdo->open();
-// QUERY FOR ALL SONGS
-$select_songs_by_id = $connection->prepare("SELECT * FROM songs"); 
-$select_songs_by_id->execute();
-?>
+<!-- UPDATE -->
+
+<?php 
+if(isset($_GET['update_song'])){
+  
+  $song_title = ($_POST['song_title']);
+  $Artist_song_name = ($_POST['Artist_song_name']);
+  $song_genre_update = ($_POST['song_genre_update']);
+
+  //UPDATE table_name
+//SET column1 = value1, column2 = value2, ...
+//WHERE condition;
+
+  // UPDATE SONGS TABLE.
+  //$SQL = $db_found->prepare("UPDATE members SET username=?, password=? WHERE email=?");
+  //$update_query = $connection->prepare("UPDATE songs SET songTitle = {$song_title}, songArtistName = {$Artist_song_name}");
+  //$update_query->execute();   
+
+}
+
+?> 
+
+<!-- LOOP FOR ALL SONGS ID -->
 
 <?php foreach($get_song_id as $row) {?>
             <?php 
     $songTitle = $row['songTitle'];
     $songArtistName = $row['songArtistName'];
+    
+    
     $songGenre = $row['songGenre'];
             ?>
 
@@ -68,7 +87,7 @@ $select_songs_by_id->execute();
   <h1 class="title">Edit Song</h1>
 
   <div>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data"> 
       <label class="edit_song_label" for="fname">Song Title</label>
       <input value="<?php echo $songTitle; ?>" type="text" id="fname" name="song_title" placeholder="Enter new title">
 
@@ -77,22 +96,26 @@ $select_songs_by_id->execute();
 
       <label class="edit_song_label" for="lname">Song Gerne</label>
       <?php 
-        $GenresID = $connection->prepare("SELECT * FROM genres WHERE genreID = {$songGenre}"); 
-        $GenresID->execute();
+      $GenresID = $connection->prepare("SELECT * FROM genres WHERE genreID = {$songGenre}"); 
+      $GenresID->execute();
       ?>
       <?php foreach($GenresID as $row){ ?>
       <?php if($songGenre == $row['genreID']): ?>
       <input value="<?= $row['genreTitle'] ?>" type="text" id="lname" name="song_genre_update" placeholder="Enter new genre">
       <?php endif;?>
       <?php } ?>
+      
       <input type="submit"  name="update_song" value="Update Song">
+
     </form>
   </div>
 </div>
 
+<!-- //UPDATING -->
+
 <?php 
 
-//UPDATING SONG
+
 
 if( isset( $_POST['edit_song'] ) ) {
 

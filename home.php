@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<?php include "db.php";?>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,48 +39,49 @@
   </div> -->
 
   <div id="main">
-    <h1 class="title">All Songs</h1>
-    
-<?php 
-include "db.php"; 
-$connection = $pdo->open(); 
-$allSongs = $connection->prepare("SELECT * FROM songs"); 
-$allSongs->execute();
-?>
 
+<!-- SELECT ALL SONGS QUERY -->
+
+<?php 
+$query = "SELECT * FROM songs";
+$select_all_songs = mysqli_query($connection,$query); 
+?>
+    <h1 class="title">All Songs</h1>
     <table id="customers">
       <tr>
         <th>Title</th>
         <th>Artist</th>
         <th>Genre</th>
       </tr>
-      
-      <?php foreach($allSongs as $row){ ?>
+      <?php foreach($select_all_songs as $row){ ?>
+      <!-- fetch ROWS -->
       <?php 
-      $songGenre   = $row['songGenre'];
-      $songID   = $row['songID'];
+      $songTitle        = $row['songTitle'];
+      $songArtistName   = $row['songArtistName'];
+      $songGenre        = $row['songGenre'];
+
+      //$songID   = $row['songID'];
       ?>
-      <!--  html -->
+
+      <!-- LOOP THROUGH ROWS -->
+
       <tr>
         <td><?= $row['songTitle'] ?></td>
         <td><?= $row['songArtistName'] ?></td>
         <?php 
-        $GenresID = $connection->prepare("SELECT * FROM genres"); 
-        $GenresID->execute();
+        $query = "SELECT * FROM genres";
+        $select_genre_id = mysqli_query($connection,$query);
         ?>
-        <?php foreach($GenresID as $row){ ?>
-          <?php if($songGenre == $row['genreID']){ ?>
+        <?php foreach($select_genre_id as $row){ ?>
+          <?php if($songGenre == $row['genreID']): ?>
           <td><?= $row['genreTitle'] ?></td>
 
-          
-          <!-- EDITED BUTTONS -->
+          <!-- BUTTONS -->
 
-          <td><a class="all_songs_delete" href="home.php?delete=<?php echo $songID ?>"> delete </td></a>
-          <td>
-          <a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> edit </a>
-          </td>
-          <?php } ?>
-        <?php } ?>
+          <td><a class="all_songs_delete" href="home.php?delete=<?php echo $songID ?>"> Delete </td></a>
+          <td><a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> Edit </a></td>
+          <?php endif; ?>
+        <?php }  ?>
       </tr>
       <?php } ?>
     </table>
@@ -85,7 +89,7 @@ $allSongs->execute();
 
   <?php
   
-  // this works when the page is refreashed
+  // this works when the page is refreashed. i Need ti change this
 
   if(isset($_GET['delete'])){
     echo $theSongID = $_GET['delete'];

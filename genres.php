@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<?php include "db.php";?>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -47,12 +50,15 @@
       <div></div>
 
     </section>
+    
+    <!-- ALL GENRES TABLE -->
+
     <?php 
-      include "db.php"; 
-      $connection = $pdo->open(); 
-      $allGenres = $connection->prepare("SELECT * FROM genres"); 
-      $allGenres->execute(); 
+      $query = "SELECT * FROM genres"; 
+      $select_all_genres_query = mysqli_query($connection,$query);
     ?>
+
+
     <?php 
 
 if (isset($_GET['genre'])) {
@@ -90,20 +96,14 @@ if (isset($_GET['genre'])) {
     
     <!-- Home cards 1 -->
     <section class="home-cards">
-    <?php    
-      $allSongs = $connection->prepare("SELECT * FROM songs"); 
-      $allSongs->execute();  
-    ?>
 
-      <?php foreach($allSongs as $row){ 
-        //$sortingGenre = $row['sorting'];
-      ?>
-
-      <a class="icon_link" href="#">
+      <!-- DISPLAY GENRES -->
       
+      <?php foreach($select_all_genres_query as $row){ ?>
+      <a class="icon_link" href="#">
         <div>
-          <?= $row['songGenre_icon'] ?>
-          <h3><?= $row['songGenreName'] ?></h3>
+          <?= $row['genre_icon'] ?>
+          <h3><?= $row['genreTitle'] ?></h3>
         </div>
       </a>
       <?php }?>
