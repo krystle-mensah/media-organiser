@@ -32,17 +32,17 @@
     </ul>
   </nav>
 
-<?php $connection = $pdo->open();?>
+<?php //$connection = $pdo->open();?>
 
-<!-- GET REQUEST FOR SONG ID -->
+<!-- GET URL REQUEST FOR SONG ID  -->
 
 <?php 
 if(isset($_GET['s_id'])){
+  
   $the_song_id = $_GET['s_id'];
 
-  //then select all from table where colum value matches the GET id.
-  $get_song_id = $connection->prepare("SELECT * FROM songs WHERE songID = {$the_song_id} ");
-  $get_song_id->execute(); 
+  $query = "SELECT * FROM songs WHERE songID = $the_song_id";
+  $select_songs_by_id = mysqli_query($connection,$query);
 
 }
 
@@ -50,21 +50,26 @@ if(isset($_GET['s_id'])){
 
 <!-- UPDATE -->
 
-<?php 
-if(isset($_GET['update_song'])){
-  
-  $song_title = ($_POST['song_title']);
+<?php
+if(isset($_POST['update_song'])){
+  //TEST
+  //echo 'hi';
+
+  //UPDATE FORM NAME
+  $song_title       = ($_POST['song_title']);
+  $songGenre        = ($_POST['songGenre']);
   $Artist_song_name = ($_POST['Artist_song_name']);
-  $song_genre_update = ($_POST['song_genre_update']);
+  
+  // UPDATE QUERY - colume name then update. 
+  $query = "UPDATE songs SET songTitle  = '{$song_title}', songGenre = '{$songGenre}',  songArtistName  = '{$Artist_song_name}' WHERE songID = {$the_song_id}";
+  $update_song = mysqli_query($connection,$query);
 
-  //UPDATE table_name
-//SET column1 = value1, column2 = value2, ...
-//WHERE condition;
-
-  // UPDATE SONGS TABLE.
-  //$SQL = $db_found->prepare("UPDATE members SET username=?, password=? WHERE email=?");
-  //$update_query = $connection->prepare("UPDATE songs SET songTitle = {$song_title}, songArtistName = {$Artist_song_name}");
-  //$update_query->execute();   
+    if(!$update_song){
+  
+      // Print a message and terminate the current script:
+      die("QUERY FAILED" . mysqli_error($connection));
+  
+    }
 
 }
 
@@ -72,12 +77,10 @@ if(isset($_GET['update_song'])){
 
 <!-- LOOP FOR ALL SONGS ID -->
 
-<?php foreach($get_song_id as $row) {?>
+<?php foreach($select_songs_by_id as $row) {?>
             <?php 
     $songTitle = $row['songTitle'];
     $songArtistName = $row['songArtistName'];
-    
-    
     $songGenre = $row['songGenre'];
             ?>
 
@@ -95,45 +98,30 @@ if(isset($_GET['update_song'])){
       <input value="<?php echo $songArtistName; ?>" type="text" id="lname" name="Artist_song_name" placeholder="Enter new artist">
 
       <label class="edit_song_label" for="lname">Song Gerne</label>
+      <select name="songGenre" id="">
       <?php 
-      $GenresID = $connection->prepare("SELECT * FROM genres WHERE genreID = {$songGenre}"); 
-      $GenresID->execute();
+      $query = "SELECT * FROM genres";
+      $select_genres = mysqli_query($connection,$query);
       ?>
-      <?php foreach($GenresID as $row){ ?>
-      <?php if($songGenre == $row['genreID']): ?>
-      <input value="<?= $row['genreTitle'] ?>" type="text" id="lname" name="song_genre_update" placeholder="Enter new genre">
-      <?php endif;?>
+
+      <?php foreach($select_genres as $row){ 
+        $GenresID = $row['genreID'];
+        $genreTitle = $row['genreTitle'];
+      ?>
+
+      <?php if($GenresID == $songGenre): ?>
+      <?php echo "<option selected value='{$GenresID}'>{$genreTitle}</option>"; ?>  
+      <?php else: ?>
+      <?php echo "<option value='{$GenresID}'>{$genreTitle}</option>"; ?>
+      <?php endif;?>  
       <?php } ?>
+
+      </select>
       
+      <!-- SUBMIT UPDATE BUTTON -->
+
       <input type="submit"  name="update_song" value="Update Song">
 
     </form>
   </div>
 </div>
-
-<!-- //UPDATING -->
-
-<?php 
-
-
-
-if( isset( $_POST['edit_song'] ) ) {
-
-  // TEST
-  echo $_POST['edit_song'];
-
-  // pick up values and save them here
-  $songTitle  = $_POST['song_title'];
-  $Artist_song_name = $_POST['Artist_song_name'];
-  $song_genre_update = $_POST['song_genre_update'];
-
-  // Then update calltoaction and set title value to value from user and url location where the id matches the Get id 
-  $update_song = $connection->prepare(" UPDATE songs  SET songTitle = '{$songTitle}', songArtistName = '{$Artist_song_name}' WHERE songID = {$the_song_id} ");
-  $update_song->execute();
-
-  //$update_song_genre = $connection->prepare(" UPDATE genres  SET genreTitle = '{$song_genre_update}' WHERE songID = {$the_song_id} ");
-  //$update_song->execute();
-
-}
-
-?>

@@ -40,12 +40,12 @@
 
   <div id="main">
 
-<!-- SELECT ALL SONGS QUERY -->
+    <!-- SELECT ALL SONGS QUERY -->
 
-<?php 
-$query = "SELECT * FROM songs";
-$select_all_songs = mysqli_query($connection,$query); 
-?>
+    <?php 
+    $query = "SELECT * FROM songs";
+    $select_all_songs = mysqli_query($connection,$query); 
+    ?>
     <h1 class="title">All Songs</h1>
     <table id="customers">
       <tr>
@@ -54,31 +54,37 @@ $select_all_songs = mysqli_query($connection,$query);
         <th>Genre</th>
       </tr>
       <?php foreach($select_all_songs as $row){ ?>
-      <!-- fetch ROWS -->
+      
+      <!-- FETCH ROWS FORM DATABASE -->
+
       <?php 
       $songTitle        = $row['songTitle'];
       $songArtistName   = $row['songArtistName'];
       $songGenre        = $row['songGenre'];
-
-      //$songID   = $row['songID'];
+      $songID   = $row['songID'];
       ?>
 
-      <!-- LOOP THROUGH ROWS -->
+      <!-- LOOP THROUGH ROWS FROM DATABASE -->
 
       <tr>
         <td><?= $row['songTitle'] ?></td>
         <td><?= $row['songArtistName'] ?></td>
+        
+        <!-- FETCH GENRES TABLE -->
         <?php 
         $query = "SELECT * FROM genres";
         $select_genre_id = mysqli_query($connection,$query);
         ?>
+        
+        <!-- LOOP THROUGH GENRE ID FOR GENRE TITLE -->
+
         <?php foreach($select_genre_id as $row){ ?>
-          <?php if($songGenre == $row['genreID']): ?>
-          <td><?= $row['genreTitle'] ?></td>
+        <?php if($songGenre == $row['genreID']): ?>
+        <td><?= $row['genreTitle'] ?></td>
 
-          <!-- BUTTONS -->
+          <!-- CURD BUTTONS -->
 
-          <td><a class="all_songs_delete" href="home.php?delete=<?php echo $songID ?>"> Delete </td></a>
+          <td><a class="all_songs_delete" href="home.php?delete=<?= $songID ?>"> Delete </td></a>
           <td><a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> Edit </a></td>
           <?php endif; ?>
         <?php }  ?>
@@ -89,18 +95,22 @@ $select_all_songs = mysqli_query($connection,$query);
 
   <?php
   
-  // this works when the page is refreashed. i Need ti change this
+  // DELETE SONG - works when page is refershed
 
   if(isset($_GET['delete'])){
-    echo $theSongID = $_GET['delete'];
+    // TEST delete
+    // //echo "hello";
+    $theSongID = $_GET['delete'];
 
-    $delete_song_query = $connection->prepare("DELETE FROM songs WHERE songID = {$theSongID}");
-    $delete_song_query->execute(); 
-  
+    // QUERY TO DELETE RECORD
 
-    //header("Location: home.php");
+    $query = "DELETE FROM songs WHERE songID = {$theSongID} ";
+    $delete_query = mysqli_query($connection,$query);
+    
+    header("Location: home.php");
   
   }
+
   ?>
 
   <script>

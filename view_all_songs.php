@@ -37,10 +37,10 @@
     <h1 class="title">All Songs</h1>
     
 <?php 
-include "db.php"; 
-$connection = $pdo->open(); 
-$allSongs = $connection->prepare("SELECT * FROM songs"); 
-$allSongs->execute(); 
+// include "db.php"; 
+// $connection = $pdo->open(); 
+// $allSongs = $connection->prepare("SELECT * FROM songs"); 
+// $allSongs->execute(); 
 ?>
 
     <table id="customers">
