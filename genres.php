@@ -28,7 +28,7 @@
       <li><a href="#">Username</a></li>
       <li><a href="#"><i class="fas fa-user"></i></a></li>
       <li><a href="home.php">Home</a></li>
-      <li><a href="genres.php">Genres</a></li>
+      <li><a href="view_genres.php">Genres</a></li>
     </ul>
   </nav>
 
@@ -51,33 +51,38 @@
 
     </section>
     
-    <!-- ALL GENRES TABLE -->
+    <!-- SELECT ALL GENRES TABLE -->
 
     <?php 
-      $query = "SELECT * FROM genres"; 
-      $select_all_genres_query = mysqli_query($connection,$query);
+      //$query = "SELECT * FROM genres"; 
+      //$select_all_genres_query = mysqli_query($connection,$query);
     ?>
 
 
+
+
     <?php 
 
-if (isset($_GET['genre'])) {
-  // compare variable with each case.
-  switch($_GET['genre']){
-    // if source is equal to add post
-    case 'acoustic';
+if (isset($_GET['source'])) {
 
-    //then display this
-    include "genre_pages/genre_acoustic.php";
+
+$source = $_GET['source'];
+
+  // compare variable with each case.
+  switch($_GET['source']){
+    // if source is equal to add post
+    case 1;
+
+    echo "hello";
 
     // stop
     break;
 
     // if source is equal to this page
-    case 'hipHop';
+    case 34;
 
     //then display this
-    include "genre_pages/genre_hipHop.php";
+    include "THIS is 34";
 
     // stop
     break;
@@ -85,7 +90,7 @@ if (isset($_GET['genre'])) {
     case 'house';
 
     //then display this
-    include "genre_pages/genre_house.php";
+    include "view_genres.php";
 
     // stop
     break;
@@ -100,7 +105,12 @@ if (isset($_GET['genre'])) {
       <!-- DISPLAY GENRES -->
       
       <?php foreach($select_all_genres_query as $row){ ?>
-      <a class="icon_link" href="#">
+
+<!-- 
+when the link is clicked I needed to send the songID and the page. I think I catch the songID on the genre page. compare this page with home.php.  
+-->
+
+      <a class="icon_link" href="genre.php?<?php echo $row['genreID']?>">
         <div>
           <?= $row['genre_icon'] ?>
           <h3><?= $row['genreTitle'] ?></h3>

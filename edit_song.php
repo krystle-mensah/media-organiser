@@ -25,10 +25,10 @@
     </span> -->
 
     <ul class="navbar-nav">
-      <li><a href="#">Username</a></li>
-      <li><a href="#"><i class="fas fa-user"></i></a></li>
+      <!-- <li><a href="#">Username</a></li> -->
+      <!-- <li><a href="#"><i class="fas fa-user"></i></a></li> -->
       <li><a href="home.php">Home</a></li>
-      <li><a href="genres.php">Genres</a></li>
+      <!-- <li><a href="view_genres.php">Genres</a></li> -->
     </ul>
   </nav>
 

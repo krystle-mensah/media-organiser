@@ -25,10 +25,10 @@
     </span> -->
 
     <ul class="navbar-nav">
-      <li><a href="#">Username</a></li>
-      <li><a href="#"><i class="fas fa-user"></i></a></li>
+      <!-- <li><a href="#">Username</a></li> -->
+      <!-- <li><a href="#"><i class="fas fa-user"></i></a></li> -->
       <li><a href="home.php">Home</a></li>
-      <li><a href="genres.php">Genres</a></li>
+      <!-- <li><a href="view_genres.php">Genres</a></li> -->
     </ul>
   </nav>
 
@@ -61,7 +61,7 @@
       $songTitle        = $row['songTitle'];
       $songArtistName   = $row['songArtistName'];
       $songGenre        = $row['songGenre'];
-      $songID   = $row['songID'];
+      $songID           = $row['songID'];
       ?>
 
       <!-- LOOP THROUGH ROWS FROM DATABASE -->
@@ -82,7 +82,7 @@
         <?php if($songGenre == $row['genreID']): ?>
         <td><?= $row['genreTitle'] ?></td>
 
-          <!-- CURD BUTTONS -->
+          <!-- BUTTONS - To edit/delete -->
 
           <td><a class="all_songs_delete" href="home.php?delete=<?= $songID ?>"> Delete </td></a>
           <td><a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> Edit </a></td>

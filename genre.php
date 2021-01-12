@@ -28,7 +28,7 @@
       <li><a href="#">Username</a></li>
       <li><a href="#"><i class="fas fa-user"></i></a></li>
       <li><a href="home.php">Home</a></li>
-      <li><a href="genres.php">Genres</a></li>
+      <li><a href="view_genres.php">Genres</a></li>
     </ul>
   </nav>
 
@@ -37,12 +37,41 @@
     <a href="home.php">Home</a>
     <a href="genres.php">Genres</a>
   </div> -->
-  <?php if(isset($_GET['specific_song_id'])){?>
-    <!-- // TEST -->
-      <!-- //echo $the_chapter = $_GET['specific_chapter_id']; -->
-      <!-- //$the_chapter = $_GET['specific_chapter_id']; -->
 
-  <?php }?>
+  
+
+<!-- GET URL REQUEST FOR SONG ID  -->
+
+<?php 
+if(isset($_GET['G_id'])){
+  
+  $the_Genre_id = $_GET['G_id'];
+  $query = "SELECT * FROM songs WHERE songGenre = $the_Genre_id";
+  $select_songs_by_genre = mysqli_query($connection,$query);
+
+  if(!$select_songs_by_genre){
+  
+    // Print a message and terminate the current script:
+    die("QUERY FAILED" . mysqli_error($connection));
+
+  }
+
+
+// <!-- LOOP FOR ALL SONGS ID -->
+
+  foreach($select_songs_by_genre as $row) {
+            
+     echo $songTitle = $row['songTitle'];
+    $songArtistName = $row['songArtistName'];
+    $songGenre = $row['songGenre'];
+
+  }
+
+  
+
+}
+
+?>
 
   <div id="main">
     <h1 class="title">Acoustic</h1>
