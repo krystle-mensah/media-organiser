@@ -40,12 +40,12 @@
 
   <div id="main">
 
-    <!-- SELECT ALL SONGS QUERY -->
-
+    <!-- FETCH ALL SONGS QUERY -->
     <?php 
     $query = "SELECT * FROM songs";
     $select_all_songs = mysqli_query($connection,$query); 
     ?>
+
     <h1 class="title">All Songs</h1>
     <table id="customers">
       <tr>
@@ -56,7 +56,6 @@
       <?php foreach($select_all_songs as $row){ ?>
       
       <!-- FETCH ROWS FORM DATABASE -->
-
       <?php 
       $songTitle        = $row['songTitle'];
       $songArtistName   = $row['songArtistName'];
@@ -69,12 +68,17 @@
 
       <tr>
         <td>
-          <?= $row['songTitle'] ?>
-          <input type="file" id="Song_file" name="song_file"><br><br>
+          <div><?= $row['songTitle'] ?></div>
+          
+          <span>
+            <audio width="400" height="350" controls>
+              <source src="musicFiles/<?php echo $songFile;  ?>" type="audio/mp3">
+            </audio>
+          </span>
         </td>
         <td><?= $row['songArtistName'] ?></td>
         
-        <!-- FETCH GENRES TABLE -->
+        <!-- FETCH ALL GENRES TABLE -->
         <?php 
         $query = "SELECT * FROM genres";
         $select_genre_id = mysqli_query($connection,$query);
@@ -82,15 +86,16 @@
         
         <!-- LOOP THROUGH GENRE ID FOR GENRE TITLE -->
 
-        <?php foreach($select_genre_id as $row){ ?>
-        <?php if($songGenre == $row['genreID']): ?>
+        <?php foreach($select_genre_id as $row){ 
+              if($songGenre == $row['genreID']){ 
+        ?>
         <td><?= $row['genreTitle'] ?></td>
 
           <!-- BUTTONS - To edit/delete -->
 
           <td><a class="all_songs_delete" href="home.php?delete=<?= $songID ?>"> Delete </td></a>
           <td><a class="all_songs_edit" href="songs.php?source=edit_song&s_id=<?php echo $songID; ?>"> Edit </a></td>
-          <?php endif; ?>
+          <?php } ?>
         <?php }  ?>
       </tr>
       <?php } ?>
@@ -99,7 +104,7 @@
 
   <?php
   
-  // DELETE SONG - works when page is refershed
+  // DELETE SONG
 
   if(isset($_GET['delete'])){
     // TEST delete
@@ -107,10 +112,9 @@
     $theSongID = $_GET['delete'];
 
     // QUERY TO DELETE RECORD
-
     $query = "DELETE FROM songs WHERE songID = {$theSongID} ";
     $delete_query = mysqli_query($connection,$query);
-    
+
     header("Location: home.php");
   
   }
