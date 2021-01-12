@@ -62,12 +62,16 @@
       $songArtistName   = $row['songArtistName'];
       $songGenre        = $row['songGenre'];
       $songID           = $row['songID'];
+      $songFile         = $row['songFile'];
       ?>
 
       <!-- LOOP THROUGH ROWS FROM DATABASE -->
 
       <tr>
-        <td><?= $row['songTitle'] ?></td>
+        <td>
+          <?= $row['songTitle'] ?>
+          <input type="file" id="Song_file" name="song_file"><br><br>
+        </td>
         <td><?= $row['songArtistName'] ?></td>
         
         <!-- FETCH GENRES TABLE -->
