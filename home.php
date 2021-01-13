@@ -104,7 +104,7 @@
 
   <?php
   
-  // DELETE SONG
+  // DELETE SONG - User has to refreash the page once the delete icon is clicked. 
 
   if(isset($_GET['delete'])){
     // TEST delete
