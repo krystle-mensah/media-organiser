@@ -196,10 +196,18 @@ a.icon_link i {
   color: white;
   font-size: 6rem;
 } 
-
+/* MEDIA LAYOUT */
 @media(max-width:767px){
   /* .navbar-nav{display:none} */
-
+  #customers {
+    display: inline;
+  }
+  tr.table_head {
+    display: none;
+  }
+  tr {
+    display: grid;
+  }
   .home-cards {
     grid-template-columns: 1fr;
   }

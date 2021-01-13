@@ -48,7 +48,7 @@
 
     <h1 class="title">All Songs</h1>
     <table id="customers">
-      <tr>
+      <tr class="table_head">
         <th>Title</th>
         <th>Artist</th>
         <th>Genre</th>
